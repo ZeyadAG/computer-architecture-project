@@ -35,7 +35,6 @@ public class Computer {
 
         short instructionFetched = -1;
         short instrucionToDecode = -1;
-        short instrucionToExecute = -1;
 
         int pc = programCounter;
 
@@ -60,7 +59,7 @@ public class Computer {
             }
             if (i > pc + 1) {
                 sb4.append("Instruction being executed: Instruction " + (i - pc - 1) + "\n");
-                execute(instrucionToExecute);
+                execute();
                 if (cpu.opcode == 4 || cpu.opcode == 7) {
                     sb.append("Register Change: Program Counter = " + programCounter + "\n");
                     sb.append("Data Memory Changes: ");
@@ -90,7 +89,6 @@ public class Computer {
                 decode(instrucionToDecode);
             }
 
-            instrucionToExecute = instrucionToDecode;
             instrucionToDecode = instructionFetched;
 
             System.out.println(sb2.toString());
@@ -150,7 +148,7 @@ public class Computer {
 
     }
 
-    public void execute(short instruction) {
+    public void execute() {
         byte opcode = cpu.opcode;
         byte operatingRegister = cpu.operatingRegister;
         byte operand1 = cpu.operand1;
