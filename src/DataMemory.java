@@ -3,7 +3,6 @@ public class DataMemory {
 
     public DataMemory() {
         this.memory = new byte[2048];
-
     }
 
     public void populateWithRandomValues() {

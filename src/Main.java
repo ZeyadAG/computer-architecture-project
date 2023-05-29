@@ -6,6 +6,7 @@ public class Main {
         Computer computer = new Computer();
 
         computer.dataMemory.populateWithRandomValues();
+
         computer.runProgram("programs/program_1.txt");
 
     }

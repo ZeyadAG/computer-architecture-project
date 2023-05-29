@@ -11,7 +11,7 @@ public class Computer {
     InstructionMemory instructionMemory;
     Register[] gpRegisters;
     boolean[] statusRegister;
-    int programCounter;
+    short programCounter;
     ArrayList<Integer> instructionModify;
 
     public Computer() {
@@ -84,6 +84,7 @@ public class Computer {
                 sb.append("Data Memory Changes: ");
             }
 
+            // decode
             if (i > pc && i < instructionMemory.memoryPointer + 1) {
                 sb3.append("Instruction being decoded: Instruction " + (i - pc));
                 decode(instrucionToDecode);
@@ -101,10 +102,10 @@ public class Computer {
             // print register and data memory that changed
             System.out.println("----------------------------\n");
 
-            if (i == instructionMemory.memoryPointer + 1) {
-                printRegsiters();
-                printMemoryContent();
-            }
+            // if (i == instructionMemory.memoryPointer + 1) {
+            // printRegsiters();
+            // printMemoryContent();
+            // }
 
         }
         System.out.println("--------------- Program Ended ---------------");
@@ -139,6 +140,7 @@ public class Computer {
 
         cpu.opcode = opcode;
         cpu.operatingRegister = argument1;
+
         cpu.operand1 = gpRegisters[argument1].data;
 
         if (opcode == 3 || opcode == 4 || opcode == 8 || opcode == 9 || opcode == 10 || opcode == 11)
@@ -367,7 +369,7 @@ public class Computer {
         }
 
         String argument1 = Integer.toBinaryString(Integer.parseInt(instructionParts[1].substring(1)));
-        String argument2;
+        String argument2; // "11"
 
         if (opcode == 3 || opcode == 4 || opcode == 8 || opcode == 9 || opcode == 10 || opcode == 11)
             argument2 = Integer.toBinaryString(Integer.parseInt(instructionParts[2]));
@@ -379,7 +381,7 @@ public class Computer {
         String resultInstructionBits = padLeftZeros(opcodeBit, 4) + padLeftZeros(argument1, 6)
                 + padLeftZeros(argument2, 6);
 
-        int tmpInstr = Integer.parseInt(resultInstructionBits, 2);
+        int tmpInstr = Integer.parseInt(resultInstructionBits, 2); // "1001 1111 1111 1111"
 
         int mod = tmpInstr % 10;
 
